@@ -4,7 +4,7 @@ pipeline:
     commands:
       - touch Gemfile.lock
       - chmod a+w Gemfile.lock
-      - chown -R jekyll:jekyll /drone/src
+      - chown -R jekyll:jekyll /drone
       - gem update --system
       - gem install bundler
       - bundle install
@@ -37,6 +37,7 @@ pipeline:
       from_secret: swarm_key
     port: 22
     script:
+      - chmod -R 755 /root/serverless-tutorials.com
       - docker stack deploy -c /root/serverless-tutorials.com/docker-compose.yml apps
     when:
       event: [push]
