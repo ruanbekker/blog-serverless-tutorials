@@ -6,8 +6,6 @@ services:
     command: jekyll serve --watch --force_polling --verbose
     networks:
       - appnet
-    ports:
-      - 4000:4000
     volumes:
       - /root/serverless-tutorials.com:/srv/jekyll
     deploy:
