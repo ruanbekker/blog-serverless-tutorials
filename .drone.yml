@@ -39,4 +39,4 @@ pipeline:
     script:
       - docker stack deploy -c /root/serverless-tutorials.com/docker-compose.yml apps
     when:
-      event: [push] 
+      event: [push]
