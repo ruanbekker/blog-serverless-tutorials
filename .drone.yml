@@ -1,0 +1,42 @@
+pipeline:      
+  build:
+    image: jekyll/jekyll:latest
+    commands:
+      - touch Gemfile.lock
+      - chmod a+w Gemfile.lock
+      - chown -R jekyll:jekyll /drone/src
+      - gem update --system
+      - gem install bundler
+      - bundle install
+      - bundle exec jekyll build
+      
+  push:
+    image: drillster/drone-rsync
+    hosts: 
+      from_secret: swarm_host
+    key:
+      from_secret: swarm_key
+    source: _site/*
+    target: ~/serverless-tutorials.com
+    recursive: true
+    user:
+      from_secret: swarm_user
+    delete: true
+    script:
+      - chmod -R 755 ~/serverless-tutorials.com
+    when:
+      event: [push]
+      
+  deploy:
+    image: appleboy/drone-ssh
+    host: 
+      from_secret: swarm_host
+    username:
+      from_secret: swarm_user
+    key:
+      from_secret: swarm_key
+    port: 22
+    script:
+      - docker stack deploy -c /root/serverless-tutorials.com/docker-compose.yml apps
+    when:
+      event: [push] 
