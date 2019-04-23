@@ -18,8 +18,8 @@ pipeline:
       from_secret: swarm_key
     user:
       from_secret: swarm_user
-    source: ./*
-    target: ~/serverless-tutorials.com
+    source: _site/*
+    target: ~/serverless-tutorials.com/_site
     recursive: true
     delete: true
     when:
