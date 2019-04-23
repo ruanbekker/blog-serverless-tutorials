@@ -36,9 +36,11 @@ pipeline:
       from_secret: swarm_user
     key:
       from_secret: swarm_key
-    target: /root/serverless-tutorials.com/docker-compose.yml
-    source: /drone/src/docker-compose.yml
+    target: /root/serverless-tutorials.com
+    source:
+      - docker-compose.yml
     when:
+      branch: [master]
       event: [push]
      
   deploy:
@@ -52,6 +54,6 @@ pipeline:
     port: 22
     script:
       - chmod -R 755 /root/serverless-tutorials.com
-      - docker stack deploy -c /root/serverless-tutorials.com/docker-compose.yml apps
+      - docker stack deploy -c /root/serverless-tutorials.com/drone/src/docker-compose.yml apps
     when:
       event: [push]
