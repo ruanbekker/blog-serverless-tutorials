@@ -9,8 +9,7 @@ pipeline:
       - gem install bundler
       - bundle install
       - bundle exec jekyll build 
-      - chown -R jekyll:jekyll /drone
-      - chmod -R 755 /drone/src/_site
+
   push:
     image: drillster/drone-rsync
     hosts: 
@@ -54,6 +53,6 @@ pipeline:
     port: 22
     script:
       - chmod -R 755 /root/serverless-tutorials.com
-      - docker stack deploy -c /root/serverless-tutorials.com/drone/src/docker-compose.yml apps
+      - docker stack deploy -c /root/serverless-tutorials.com/docker-compose.yml apps
     when:
       event: [push]
