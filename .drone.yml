@@ -17,7 +17,7 @@ pipeline:
       from_secret: swarm_host
     key:
       from_secret: swarm_key
-    source: _site/*
+    source: _site
     target: ~/serverless-tutorials.com
     recursive: true
     user:
