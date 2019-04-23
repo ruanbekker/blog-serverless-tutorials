@@ -19,8 +19,9 @@ pipeline:
     user:
       from_secret: swarm_user
     script:
+      - find .
       - mkdir -p ~/serverless-tutorials.com/_site
-    source: _site
+    source: ./*
     target: ~/serverless-tutorials.com
     recursive: true
     delete: true
