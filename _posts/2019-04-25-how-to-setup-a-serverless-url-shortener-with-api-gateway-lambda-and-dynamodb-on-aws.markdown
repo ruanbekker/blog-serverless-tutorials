@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to Setup a Serverless URL Shortener with API Gateway Lambda and DynamoDB on AWS"
+title:  "Setup a Serverless URL Shortener on AWS"
 date: 2018-11-30 02:51:24 -0500
 categories: ["aws"]
 tags: ["dynamodb", "lambda", "api-gateway", "python"]
